@@ -1,0 +1,21 @@
+Changelog
+=========
+
+Version 0.7
+-----------
+ * Add support for language detection and finding supported languages (Thanks
+   to Karthik Balakrishnan)
+
+Version 0.6
+-----------
+ * Handle token expiry (Thanks to @ScreenDriver)
+
+Version 0.4
+-----------
+ * Updated to use the Oauth based token issued by Bing
+ * This release is not backward compatibleas the class signature has changed
+
+Version 0.3
+-----------
+ * Encode text as UTF-8 before sending to translator
+ * Improved JSON Error handling
