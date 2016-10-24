@@ -2,7 +2,7 @@
 A module to store methods that will query the microsoft (bing) api to translate words/phrases and add the results to the db.
 """
 from pprint import pprint
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from g.config import microsoft_translator
 from g.models import Language, Word
 

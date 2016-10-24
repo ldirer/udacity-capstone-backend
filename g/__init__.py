@@ -1,5 +1,6 @@
+import json
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__.split('.')[0])
 app.config.from_object('g.config')
@@ -7,7 +8,13 @@ app.config.from_object('g.config')
 db = SQLAlchemy(app)
 
 import g.api
-import g.models
+
+
+# For some reason when using --uwsgi-file only routes defined in THIS FILE are taken into account...
+@app.route('/test_again')
+def retest():
+    return json.dumps({"hello": "world - 2!"})
+
 
 # db.create_all()
 

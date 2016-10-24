@@ -1,7 +1,7 @@
 import os
-from flask.ext.script import Shell, Manager
-from flask.ext.script.commands import Server
-from flask.ext.migrate import Migrate, MigrateCommand
+from flask_script import Shell, Manager, prompt_bool
+from flask_script.commands import Server
+from flask_migrate import Migrate, MigrateCommand
 
 from g import app, db, models
 
@@ -19,6 +19,20 @@ manager.add_command("runserver", Server())
 
 
 migrate = Migrate(app, db, directory=os.path.join(os.path.dirname(__file__), 'g/migrations'))
+
+
+@MigrateCommand.command
+def create_db():
+    """Create database tables from sqlalchemy models."""
+    db.create_all()
+
+
+@MigrateCommand.command
+def drop():
+    """Drops database tables"""
+    if prompt_bool("Are you sure you want to lose all your data"):
+        db.drop_all()
+
 manager.add_command("db", MigrateCommand)
 
 
