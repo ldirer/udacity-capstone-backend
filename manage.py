@@ -4,7 +4,7 @@ from flask_script.commands import Server
 from flask_migrate import Migrate, MigrateCommand
 
 from g import app, db, models
-
+from g.fixtures import languages, words
 
 manager = Manager(app)
 
@@ -32,6 +32,13 @@ def drop():
     """Drops database tables"""
     if prompt_bool("Are you sure you want to lose all your data"):
         db.drop_all()
+
+
+@MigrateCommand.command
+def populate_fixtures():
+    """Populate the db with basic words for some languages."""
+    languages()
+    words()
 
 manager.add_command("db", MigrateCommand)
 

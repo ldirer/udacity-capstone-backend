@@ -1,15 +1,13 @@
 import json
-from datetime import timezone, datetime
+from datetime import datetime
+
 from flask import request
 from flask_restless.helpers import url_for
 from flask_restless.manager import APIManager
-from flask.wrappers import Response
 from pytz import UTC
 
 from g import app, db
 from g.models import Language, User, Attempt, UserLanguage
-
-from g.translator import main_script
 
 """I tried flask_restless 1.xx (beta). I don't like that the response has so many nested levels (like a top-level "attributes" for the data we usually want!...
 So I reverted in spite of some nice new features, like the ability to PATCH relationships directly on an object.
@@ -30,12 +28,6 @@ api_manager.create_api(UserLanguage, methods=['GET', 'POST'], include_methods=['
 def test():
     Language.query.filter_by(_id=1)
     return json.dumps({"Hello": "world"})
-
-
-@app.route("/translation_script")
-def translate():
-    main_script(db)
-    return "It's ok baby it's ok."
 
 
 def get_last_update(user_id):
