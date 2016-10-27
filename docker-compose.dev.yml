@@ -1,0 +1,13 @@
+version: '2'
+
+# Use: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# For multi-value fields, compose will merge the lists of values.
+services:
+  web:
+    environment:
+      - UDACITY_ENV=DEVELOPMENT
+    volumes:
+      - .:/udacity_capstone
+  db:
+    volumes:
+      - ./.local/pgdata:/var/lib/postgresql/data/

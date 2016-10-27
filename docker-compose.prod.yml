@@ -1,0 +1,17 @@
+version: '2'
+
+# Use: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# For multi-value fields, compose will merge the lists of values.
+services:
+  web:
+    environment:
+      - UDACITY_ENV=PRODUCTION
+    image: ldirer/capstone-prod
+  db:
+    image: ldirer/capstone-postgres-prod
+    # This is already in postgres base image.
+#    volumes:
+#        - /var/lib/postgresql/data
+    volumes:
+    # This matches the PGDATA env variable.
+        - /var/lib/postgresql/data/pgdata:/var/lib/postgresql/data/pgdata

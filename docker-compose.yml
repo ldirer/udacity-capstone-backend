@@ -8,13 +8,9 @@ services:
     environment:
       - SQLALCHEMY_DATABASE_URI=postgres://udacity:capstone@db/capstone
     ports:
-      - "9090:9090"
+      - "80:80"
       - "9191:9191"
-    volumes:
-      - .:/udacity_capstone
   db:
     build:
       context: .
       dockerfile: docker/postgres.dockerfile
-    volumes:
-      - ./.local/pg0-data:/var/lib/postgresql/data/pgdata
